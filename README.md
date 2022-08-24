@@ -1,8 +1,8 @@
 # featherwing-random-mp3-player
-A shuffling MP3 player using the Adafruit FeatherWing Music Maker
+A shuffling MP3 player using the Adafruit FeatherWing Music Maker.
 
 I have a project in mind that will play music files with no interface, just a power switch. I
-used an (https://www.adafruit.com/product/3357)[Adafruit Music Maker FeatherWing] on a Feather Board to
+used an [Adafruit Music Maker FeatherWing](https://www.adafruit.com/product/3357) on a Feather Board to
 implement the MP3 player portion.
 
 This code will read all the MP3 files in the *root* directory of the SD card and continuously play them in random
