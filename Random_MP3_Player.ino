@@ -111,13 +111,13 @@ String getMp3FilenameByIndexNumber(int targetIndex, File dir) {
 }
 
 void playRandomMp3File() {
-    int randomFileNumber = random(0, numberOfMp3Files);
-    String filename = getMp3FilenameByIndexNumber(randomFileNumber, sdCardRoot);
+  int randomFileNumber = random(0, numberOfMp3Files);
+  String filename = getMp3FilenameByIndexNumber(randomFileNumber, sdCardRoot);
 
-    // You can't play a string name, it must be converted to char first
-    char charBuf[50];
-    filename.toCharArray(charBuf, 50);
+  // You can't play a string name, it must be converted to char first
+  char charBuf[50];
+  filename.toCharArray(charBuf, 50);
 
-    Serial.println("Playing file: " + filename);    
-    musicPlayer.startPlayingFile(charBuf);
+  Serial.println("Playing file: " + filename);    
+  musicPlayer.startPlayingFile(charBuf);
 }
