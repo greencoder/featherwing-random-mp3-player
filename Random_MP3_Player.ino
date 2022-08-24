@@ -61,7 +61,7 @@ int countMp3Files(File dir) {
   String fileName;
   
   while(true) {     
-    File entry =  dir.openNextFile();
+    File entry = dir.openNextFile();
 
     if (!entry) {
       break;
