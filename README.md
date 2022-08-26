@@ -1,17 +1,15 @@
 # featherwing-random-mp3-player
+
 A shuffling MP3 player using the Adafruit FeatherWing Music Maker.
 
-I have a project in mind that will play music files with no interface, just a power switch. I
-used an [Adafruit Music Maker FeatherWing](https://www.adafruit.com/product/3357) on a ESP8266 Feather Board to
-implement the MP3 player portion.
+I have a project in mind that will play music files with no interface, just a power switch. (kind of
+a self-playing jukebox)
 
-This code will read all the MP3 files in the *root* directory of the SD card and continuously play them in random
-order. It will skip over directories and hidden files. (like the `.Spotlight-V100` MacOS puts on the card)
+I used an [Adafruit Music Maker FeatherWing](https://www.adafruit.com/product/3357) on a ESP8266 Feather Board to implement the MP3 player portion.
 
-Because of memory limitations, it's not possible to read all the names of the files into an array and sample from it.
-Instead, I count the number of MP3 files on the SD card, then I choose a random number between `0` and `count` to
-pick a song to play. There is no checking to see if the file has been recently played, that would be a nice feature
-to add. (Pull requests gladly accepted!)
+This code will read all the MP3 files in the *root* directory of the SD card and continuously play them in random order. It will skip over directories and hidden files. (like the `.Spotlight-V100` MacOS puts on the card)
+
+Because of memory limitations, it's not possible to read all the names of the files into an array and sample from it. Instead, I count the number of MP3 files on the SD card, then I choose a random number between `0` and `count` to pick a song to play. There is no checking to see if the file has been recently played, that would be a nice feature to add. (Pull requests gladly accepted!)
 
 Limitations:
 * The MP3 files must be in the root of the SD card, they cannot be in directories
