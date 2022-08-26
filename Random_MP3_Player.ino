@@ -27,7 +27,6 @@ void setup() {
   }
 
   musicPlayer.setVolume(0, 0);
-  musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);
 
   if (!SD.begin(CARDCS)) {
     Serial.println(F("SD failed, or not present"));
@@ -37,17 +36,12 @@ void setup() {
   sdCardRoot = SD.open("/");
   numberOfMp3Files = countMp3Files(sdCardRoot);
   Serial.println("Found " + String(numberOfMp3Files) + " MP3 files");
-
-  playRandomMp3File();
 }
 
-void loop() {  
-  if (musicPlayer.stopped()) {
-    Serial.println("Music player is stopped.");
+void loop() {
+  while (true) {
     playRandomMp3File();
   }
-
-  delay(100);
 }
 
 bool isValidMp3FileName(String fileName) {
@@ -58,10 +52,10 @@ bool isValidMp3FileName(String fileName) {
 
 int countMp3Files(File dir) {
   int numberOfMp3Files = 0;
-  String fileName;
-  
-  while(true) {     
-    File entry = dir.openNextFile();
+
+  while (true) {
+    File entry =  dir.openNextFile();
+    String fileName;
 
     if (!entry) {
       break;
@@ -73,11 +67,10 @@ int countMp3Files(File dir) {
     if (!entry.isDirectory() && isValidMp3FileName(fileName)) {
       numberOfMp3Files++;
     }
-     
+
     entry.close();
   }
 
-  dir.rewindDirectory();
   return numberOfMp3Files;
 }
 
@@ -87,14 +80,14 @@ String getMp3FilenameByIndexNumber(int targetIndex, File dir) {
 
   while (true) {
     File entry =  dir.openNextFile();
-    
+
     if (!entry) {
       break;
     }
     else {
       fileName = String(entry.name());
     }
-    
+
     if (!entry.isDirectory() && isValidMp3FileName(fileName)) {
       mp3FileIndex++;
     }
@@ -114,10 +107,11 @@ void playRandomMp3File() {
   int randomFileNumber = random(0, numberOfMp3Files);
   String filename = getMp3FilenameByIndexNumber(randomFileNumber, sdCardRoot);
 
-  // You can't play a string name, it must be converted to char first
-  char charBuf[50];
-  filename.toCharArray(charBuf, 50);
+  // You can't play a string name, it must be converted to char array first
+  int strLength = filename.length() + 1;
+  char charBuf[strLength];
+  filename.toCharArray(charBuf, strLength);
 
-  Serial.println("Playing file: " + filename);    
-  musicPlayer.startPlayingFile(charBuf);
+  Serial.println("Playing file: " + filename);
+  musicPlayer.playFullFile(charBuf);
 }
